@@ -10,6 +10,8 @@ app.use(express.json())
 app.use(cors())
 app.use(logger)
 
+
+
 app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/account", require("./routes/account.routes"))
 
@@ -21,6 +23,6 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: "Server Error", error: err.message })
 })
 mongoose.connection.once("open", () => {
-    console.log("MONGO CONNECTED")
+    console.log("MONGO CONNECTED", process.env.PORT)
     app.listen(process.env.PORT, console.log("SERVER RUNNING"))
 })
